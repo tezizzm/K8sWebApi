@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace bootcamp_webapi.Controllers
 {
@@ -10,15 +11,26 @@ namespace bootcamp_webapi.Controllers
     [ApiController]
     public class ProductsController : Controller
     {
+        private IConfiguration Configuration { get; }
         private readonly ProductContext _context;
-        public ProductsController([FromServices] ProductContext context)
+        public ProductsController([FromServices] ProductContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
+            var apiSettings = Configuration
+                .GetSection("api")
+                .Get<ApiSettings>();
+
+            if (apiSettings.Title != null)
+            {
+                Console.WriteLine("**************************DISCOVERED CONFIGURATION************");
+            }
+
             var connection = _context.Database.GetDbConnection();
             Console.WriteLine($"Retrieving product catalog from {connection.DataSource}/{connection.Database}");
             return await _context.Products.ToListAsync();
