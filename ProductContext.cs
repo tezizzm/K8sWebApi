@@ -22,7 +22,8 @@ namespace bootcamp_webapi
                 new {Id = 2L, Category = "Sports", Inventory = 4, Name="Upper Deck Baseball Set"},
                 new {Id = 3L, Category = "Groceries", Inventory = 2, Name="Gatorade"},
                 new {Id = 4L, Category = "Electronics", Inventory = 50, Name="Google Pixel 3"},
-                new {Id = 5L, Category = "Home and Garden", Inventory = 20, Name="Kitchenette Stand Mixer"}
+                new {Id = 5L, Category = "Home and Garden", Inventory = 20, Name="Kitchenette Stand Mixer"},
+                new {Id = 6L, Category = "Computers", Inventory = 7, Name="Lenovo"}
             };
 
             modelBuilder.Entity<Product>().HasData(products);
