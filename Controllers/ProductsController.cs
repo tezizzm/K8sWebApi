@@ -22,15 +22,6 @@ namespace bootcamp_webapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            var apiSettings = Configuration
-                .GetSection("api")
-                .Get<ApiSettings>();
-
-            if (apiSettings.Title != null)
-            {
-                Console.WriteLine("**************************DISCOVERED CONFIGURATION************");
-            }
-
             var connection = _context.Database.GetDbConnection();
             Console.WriteLine($"Retrieving product catalog from {connection.DataSource}/{connection.Database}");
             return await _context.Products.ToListAsync();
