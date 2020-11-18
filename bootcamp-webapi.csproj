@@ -3,9 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>bootcamp_webapi</RootNamespace>
-    <UserSecretsId>5ab4fdb6-b327-4d5c-9b02-f30f2f88b1d6</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,9 +14,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Kubernetes.Tools.Targets" Version="1.1.0" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.6.2" />
-    <PackageReference Include="Steeltoe.CloudFoundry.Connector.EFCore" Version="2.4.4" />
-    <PackageReference Include="Steeltoe.CloudFoundry.ConnectorCore" Version="2.4.4" />
-    <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesCore" Version="3.0.0" />
+    <PackageReference Include="Steeltoe.Common.Hosting" Version="3.0.0-rc1" />
+    <PackageReference Include="Steeltoe.Connector.EFCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Connector.ConnectorCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Extensions.Configuration.KubernetesCore" Version="3.0.1" />
+    <PackageReference Include="Steeltoe.Management.KubernetesCore" Version="3.0.1" />
   </ItemGroup>
 
 

@@ -11,9 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Steeltoe.CloudFoundry.Connector;
-using Steeltoe.CloudFoundry.Connector.MySql.EFCore;
-using Steeltoe.CloudFoundry.Connector.Services;
 using NJsonSchema;
 using NSwag.AspNetCore;
 

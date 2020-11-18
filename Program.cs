@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
+using Steeltoe.Common;
+using Steeltoe.Common.Hosting;
 using Steeltoe.Extensions.Configuration.Kubernetes;
+using Steeltoe.Management.Kubernetes;
 
 namespace bootcamp_webapi
 {
@@ -21,13 +19,31 @@ namespace bootcamp_webapi
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-        //        .AddKubernetesConfiguration()
-        ;
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+                    builder.AddKubernetes(loggerFactory: GetLoggerFactory());
+                    if (Platform.IsKubernetes)
+                    {
+                    }
+                })
+                .AddKubernetesActuators();
+
+        private static ILoggerFactory GetLoggerFactory()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddLogging(builder => builder.SetMinimumLevel(LogLevel.Trace));
+            serviceCollection.AddLogging(builder => builder.AddConsole((opts) =>
+            {
+                opts.DisableColors = true;
+            }));
+            serviceCollection.AddLogging(builder => builder.AddDebug());
+            return serviceCollection.BuildServiceProvider().GetService<ILoggerFactory>();
+        }
     }
 }
