@@ -28,11 +28,15 @@ namespace bootcamp_webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+
             services.AddDbContext<ProductContext>(options => options.UseSqlite("DataSource=:memory:"), ServiceLifetime.Singleton);
 
-            var apiSettings = Configuration
-                .GetSection("api")
-                .Get<ApiSettings>();
+            var apiSettings = new ApiSettings
+            {
+                Version = Configuration["Api.Version"],
+                Title = Configuration["Api.Title"]
+            };
 
             services.AddSwaggerDocument(config => 
             {

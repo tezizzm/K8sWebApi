@@ -28,9 +28,9 @@ namespace bootcamp_webapi
                 .ConfigureAppConfiguration((context, builder) =>
                 {
                     builder.AddKubernetes(loggerFactory: GetLoggerFactory());
-                    if (Platform.IsKubernetes)
-                    {
-                    }
+                    //if (Platform.IsKubernetes)
+                    //{
+                    //}
                 })
                 .UseCloudHosting()
                 .AddKubernetesActuators();
