@@ -32,6 +32,7 @@ namespace bootcamp_webapi
                     {
                     }
                 })
+                .UseCloudHosting()
                 .AddKubernetesActuators();
 
         private static ILoggerFactory GetLoggerFactory()
